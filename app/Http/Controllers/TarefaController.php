@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Tarefa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\NovaTarefaMail;
+use Illuminate\Support\Facades\Mail;
 
 class TarefaController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
     /**
@@ -23,7 +26,7 @@ class TarefaController extends Controller
         $email = Auth::user()->email;
 
         return "ID: $id | Nome: $nome | E-mail: $email";
-        
+
         // if(auth()->check()){
         //     $id = auth()->user()->id;
         //     $nome = Auth::user()->name;
@@ -42,7 +45,7 @@ class TarefaController extends Controller
      */
     public function create()
     {
-        //
+        return view('tarefa.create');
     }
 
     /**
@@ -53,7 +56,28 @@ class TarefaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regras = [
+            'tarefa' => 'required|max:200|min:5',
+            'data_limite_conclusao' => 'required'
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'max' =>  'O campo nome deve ter no máximo 200 caracteres',
+            'min' => 'O campo nome deve ter no mínimo 3 caracteres'
+        ];
+
+        $request->validate($regras, $feedback);
+
+        $dados = $request->all('tarefa', 'data_limite_conclusao');
+        $dados['user_id'] = auth()->user()->id;
+
+        $tarefa = Tarefa::create($dados);
+
+        $destinatario = auth()->user()->email; //email do usuário autenticado
+        Mail::to($destinatario)->send(New NovaTarefaMail($tarefa));
+        
+        return redirect()->route('tarefa.show', [$tarefa->id]);
     }
 
     /**
@@ -64,7 +88,7 @@ class TarefaController extends Controller
      */
     public function show(Tarefa $tarefa)
     {
-        //
+        return view('tarefa.show', compact('tarefa'));
     }
 
     /**
