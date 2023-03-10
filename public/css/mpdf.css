@@ -1,0 +1,135 @@
+body {
+    /* font-family: DejaVuSansCondensed, sans-serif;
+    font-size: 11pt; */
+    font-family: serif; 
+    font-size: 10pt; 
+}
+
+p {
+    text-align: justify;
+}
+
+hr {
+    width: 90%;
+    height: 1px;
+    text-align: center;
+    color: #e2dbdbe3;
+    margin-top: 1pt;
+    margin-bottom: 8pt;
+}
+
+h1 {
+    color: #0e3d73;
+    font-weight: normal;
+    font-size: 26pt;
+    /* font-family: DejaVuSansCondensed, sans-serif; */
+    font-family: sans-serif; 
+    margin-top: 18pt;
+    margin-bottom: 6pt;
+    text-align: center;
+}
+
+h2, h3{
+    text-align: center;
+}
+
+h2, h4, h3 {
+    text-transform: uppercase;
+    color: #0e3d73;
+
+}
+
+.img-circle {
+    float: left;
+    margin-left: 20px;
+    vertical-align: middle;
+    height: 30px;
+    width: 30px;
+}
+
+.comments {
+    /* background: #ececec; */
+    font-size: 13px;
+    line-height: 1.42857143;
+    margin-bottom:20px;
+    padding: 4px 0;
+    width: 100%;
+}
+
+.comment-text {
+    color: #555;
+    display: block;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.box-comment {
+    border-bottom: 1px solid #ddd;
+    padding: 2px 0;
+}
+
+.username {
+    color: #444;
+    font-weight: bold;
+    white-space: initial;
+}
+
+.created-at {
+    font-size: 13.6px;
+    font-weight: 400;
+    color: #777;
+}
+
+.agendas {
+    font-weight: bold;
+    font-size: 13pt;
+    margin-top: 8pt;
+}
+
+.subtitle {
+    text-align: center;
+}
+
+.breadcrumb {
+    color: #666666;
+    font-family: DejaVuSerifCondensed, serif;
+    font-size: 8pt;
+    font-style: normal;
+    font-weight: bold;
+    margin-bottom: 6pt;
+    text-align: right;
+}
+
+.title-agendas {
+    color: #0e3d73;
+    font-size:9.1pt;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+table {
+    border: 1px solid black;
+    border-spacing: 15px;
+    margin-left: -17px;
+    margin-right: -17px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: justify;
+}
+
+th, td {
+    border: 1px solid #ddd;
+}
+
+.p-votos {
+    color: #444;
+    font-weight: bold;
+    white-space: initial;
+}
+
+.p-texto-votos {
+    width: 97%;
+    height: 1px;
+}

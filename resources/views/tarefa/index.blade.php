@@ -29,7 +29,7 @@
                                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                       <a class="dropdown-item" href="{{route('tarefa.exportacao', ['extensao' => 'xlsx'])}}">XLSX</a>
                                       <a class="dropdown-item" href="{{route('tarefa.exportacao', ['extensao' => 'csv'])}}">CSV</a>
-                                      <a class="dropdown-item" href="{{route('tarefa.exportacao', ['extensao' => 'pdf'])}}">PDF</a>
+                                      <a target="_blank" class="dropdown-item" href="{{route('tarefa.exportacao', ['extensao' => 'pdf'])}}">PDF</a>
                                       <a class="dropdown-item" href="{{route('tarefa.exportacao-pdf')}}" target="_blank">PDF V2</a>
                                     </div>
                                   </div>

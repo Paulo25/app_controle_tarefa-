@@ -53,7 +53,8 @@ class TarefaController extends Controller
      */
     public function create()
     {
-        return view('tarefa.create');
+        // return view('tarefa.create');
+        return view('tarefa.mpdf');
     }
 
     /**
@@ -152,7 +153,59 @@ class TarefaController extends Controller
             return redirect()->route('tarefa.index');
         }
         
-        return Excel::download(new TarefasExport, "lista_de_tarefas.$extensao");
+        $mpdf = new \Mpdf\Mpdf();
+        $html = view('tarefa.mpdf')->render();
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->WriteHTML(file_get_contents('css/mpdf.css'), 1);
+
+        // $mpdf->SetHeader('Chapter 1 | Country list|{PAGENO}');
+        // $mpdf->SetHeader('
+        // <div class="border" >
+        // <div  style="text-align: left;">
+        //  <img style="width: 133px; height: 30px;" class="logo" src="https://agenciavirtual.guarida.com.br/assets/img/logoHeaderNew.png" alt="" /> 
+        // </div>
+  
+        // <div class="column-right">
+        //     <h3>ATA DA ASSEMBLEIA EXTRAORDINÁRIA
+        //      CONDOMÍNIO SAINT PAUL
+        //      RUA/AV . ANTONIO CARNEIRO PINTO, CORONEL, 63, CEP
+        //      90460020
+        //      PORTO ALEGRE/RS
+        //  </h3>
+        // </div>
+        // </div>');
+
+        $data = 'ASSEMBLEIA EXTRAORDINÁRIA';
+
+        $mpdf->SetHeader('
+        <img style="width: 133px; height: 30px;" class="logo" src="https://agenciavirtual.guarida.com.br/assets/img/logoHeaderNew.png" alt="" />
+        <h3 style="margin-bottom:0px;" text-transform: uppercase; color: #0e3d73;>
+        ATA DA ASSEMBLEIA EXTRAORDINÁRIA <br/>  
+        CONDOMÍNIO SAINT PAUL,
+        RUA/AV. ANTONIO CARNEIRO PINTO, CORONEL, 63 <br/> CEP
+        90460020,
+        PORTO ALEGRE/RS
+        </h3>');
+        $mpdf->SetFooter('página.{PAGENO}');
+        
+
+        $mpdf->showWatermarkText = true;
+        $mpdf->AddPage('P', 
+            '', 
+            '', 
+            '', 
+            '',
+            10, // margin_left
+            10, // margin right
+            45, // margin top
+            10, // margin bottom
+            5, // margin header
+            1); //margin footer
+        
+            $mpdf->WriteHTML($html);
+            $mpdf->Output();
+
+        //return Excel::download(new TarefasExport, "lista_de_tarefas.$extensao");
     }
 
     public function exportacaoPDF(){
